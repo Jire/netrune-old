@@ -4,9 +4,12 @@ class ExtendedVersionCatalogBuilder(
     ref: VersionCatalogBuilder
 ) : VersionCatalogBuilder by ref {
 
-    operator fun String.invoke(
-        group: String, version: String,
-        artifact: String = this
-    ) = libraryVersioned(group, artifact, version, this)
+    inline fun dependencies(declare: ExtendedVersionCatalogDependenciesBuilder.() -> Unit) {
+        ExtendedVersionCatalogDependenciesBuilder(this).declare()
+    }
+
+    inline fun plugins(declare: ExtendedVersionCatalogPluginsBuilder.() -> Unit) {
+        ExtendedVersionCatalogPluginsBuilder(this).declare()
+    }
 
 }
