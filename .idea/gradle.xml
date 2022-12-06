@@ -26,8 +26,14 @@
             <option value="$PROJECT_DIR$/build-src" />
             <option value="$PROJECT_DIR$/build-src/extended-version-catalog-builder" />
             <option value="$PROJECT_DIR$/build-src/project-plugin" />
+            <option value="$PROJECT_DIR$/bytes" />
             <option value="$PROJECT_DIR$/cache" />
-            <option value="$PROJECT_DIR$/protocol" />
+            <option value="$PROJECT_DIR$/codec" />
+            <option value="$PROJECT_DIR$/codec-js5" />
+            <option value="$PROJECT_DIR$/codec-osrs-game" />
+            <option value="$PROJECT_DIR$/codec-osrs-game-r209" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/net" />
             <option value="$PROJECT_DIR$/server" />
           </set>
         </option>
