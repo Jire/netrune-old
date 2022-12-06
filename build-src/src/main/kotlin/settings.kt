@@ -2,7 +2,7 @@ import org.gradle.api.initialization.Settings
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.maven
 
-const val DEFAULT_KOTLIN_VERSION = "1.7.20"
+const val DEFAULT_KOTLIN_VERSION = "1.8.0-Beta"
 
 @Suppress("UnstableApiUsage")
 internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
@@ -11,6 +11,7 @@ internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
             mavenCentral()
             gradlePluginPortal()
             maven(url = "https://repo.runelite.net/")
+            maven(url = "https://repo.openrs2.org/repository/openrs2-snapshots/")
         }
     }
     pluginManagement.plugins.apply {
