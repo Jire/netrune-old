@@ -12,7 +12,7 @@ plugins {
 versionCatalog {
     dependencies {
         "fastutil"("it.unimi.dsi", "8.5.9")
-        "runelite-cache"("net.runelite", "1.8.34.1", "cache")
+        "runelite-cache"("net.runelite", "1.9.4.1", "cache")
 
         group("io.netty", "netty", "4.1.85.Final") {
             "netty-buffer"()
@@ -25,7 +25,7 @@ versionCatalog {
         }
         "netty-incubator-transport-native-iouring"(
             "io.netty.incubator",
-            "0.0.15.Final",
+            "0.0.16.Final",
             "netty-incubator-transport-native-io_uring"
         )
 
@@ -42,7 +42,7 @@ versionCatalog {
             "kotlin-script-runtime"()
         }
 
-        group("org.slf4j", "slf4j", "2.0.4") {
+        group("org.slf4j", "slf4j", "2.0.5") {
             "slf4j-api"()
             "slf4j-simple"()
         }
