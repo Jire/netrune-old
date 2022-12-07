@@ -5,6 +5,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.ByteToMessageDecoder
 import org.jire.netrune.buffer.netty4.Netty4ReadableBuffer
 import org.jire.netrune.codec.SteppedBufferDecoder
+import org.jire.netrune.net.netty4.fixedBuffer
 import java.nio.channels.ClosedChannelException
 
 class ByteToPacketDecoder : ByteToMessageDecoder() {
@@ -35,8 +36,7 @@ class ByteToPacketDecoder : ByteToMessageDecoder() {
                     val build = input.int()
                     println("build is: $build")
 
-                    ctx.writeAndFlush(ctx.alloc().buffer(1, 1).writeByte(0), ctx.voidPromise())
-                    //output(Unpooled.buffer(1, 1).writeByte(0))
+                    ctx.writeAndFlush(ctx.alloc().fixedBuffer(1).writeByte(0), ctx.voidPromise())
                 }
             }
         }
