@@ -5,6 +5,8 @@ plugins {
 dependencies {
     api(projects.net)
 
+    api(projects.bufferNetty4)
+
     api(libs.netty.transport)
 
     api(libs.netty.transport.native.epoll)

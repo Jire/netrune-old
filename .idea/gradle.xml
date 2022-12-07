@@ -23,6 +23,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buffer" />
+            <option value="$PROJECT_DIR$/buffer-netty4" />
             <option value="$PROJECT_DIR$/build-src" />
             <option value="$PROJECT_DIR$/build-src/extended-version-catalog-builder" />
             <option value="$PROJECT_DIR$/build-src/project-plugin" />

@@ -54,8 +54,10 @@ include(
     "common",
 
     "bytes",
-    "buffer",
     "codec",
+
+    "buffer",
+    "buffer-netty4",
 
     "net",
     "net-netty4",
