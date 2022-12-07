@@ -33,7 +33,11 @@
             <option value="$PROJECT_DIR$/codec-osrs-game" />
             <option value="$PROJECT_DIR$/codec-osrs-game-r209" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/logging" />
             <option value="$PROJECT_DIR$/net" />
+            <option value="$PROJECT_DIR$/net-netty4" />
+            <option value="$PROJECT_DIR$/net-server" />
+            <option value="$PROJECT_DIR$/net-server-netty4" />
             <option value="$PROJECT_DIR$/server" />
           </set>
         </option>

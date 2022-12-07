@@ -5,9 +5,10 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.netServerNetty4)
+    api(projects.codec)
 
-    runtimeOnly(libs.slf4j.simple)
+    api(projects.netServer)
+    api(projects.netNetty4)
 }
 
 application {

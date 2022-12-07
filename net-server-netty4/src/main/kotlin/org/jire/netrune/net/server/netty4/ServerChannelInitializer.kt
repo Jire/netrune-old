@@ -1,4 +1,4 @@
-package org.jire.netrune.server
+package org.jire.netrune.net.server.netty4
 
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.SocketChannel

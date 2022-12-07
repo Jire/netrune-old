@@ -50,12 +50,18 @@ versionCatalog {
 }
 
 include(
+    "logging",
     "common",
 
     "bytes",
     "buffer",
-    "net",
     "codec",
+
+    "net",
+    "net-netty4",
+
+    "net-server",
+    "net-server-netty4",
 
     "codec-js5",
 
