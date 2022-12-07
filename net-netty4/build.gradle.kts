@@ -12,4 +12,6 @@ dependencies {
     api(libs.netty.transport.native.epoll)
     api(libs.netty.transport.native.kqueue)
     api(libs.netty.incubator.transport.native.iouring)
+
+    api(libs.netty.codec)
 }
