@@ -16,8 +16,13 @@ class Netty4Server(
     val bootstrap: ServerBootstrap = bootstrapFactory.serverBootstrap(parentGroup, childGroup)
 ) : Server {
 
-    override fun bind(localAddress: SocketAddress) {
-        bootstrap.bind(localAddress)
+    override fun bind(localAddress: SocketAddress): Netty4ServerBinding {
+        val bindFuture = bootstrap.bind(localAddress)
+        val channelCloseFuture = bindFuture.channel().closeFuture()
+        return Netty4ServerBinding(
+            localAddress,
+            bindFuture, channelCloseFuture
+        )
     }
 
     override fun shutdown() = listOf(
