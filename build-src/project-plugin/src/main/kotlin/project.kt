@@ -17,8 +17,8 @@ internal fun Project.netrune() {
     group = NETRUNE_DEFAULT_GROUP
     version = NETRUNE_DEFAULT_VERSION
 
-    plugins.withType<JavaPlugin>().configureEach {
-        configure<JavaPluginExtension> {
+    configure<JavaPluginExtension> {
+        plugins.withType<JavaPlugin>().configureEach {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
