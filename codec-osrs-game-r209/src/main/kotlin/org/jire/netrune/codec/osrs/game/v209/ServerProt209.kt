@@ -1,4 +1,4 @@
-package org.jire.netrune.codec.osrs.game
+package org.jire.netrune.codec.osrs.game.v209
 
 enum class ServerProt209(
     val opcode: Int,

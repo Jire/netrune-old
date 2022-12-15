@@ -1,4 +1,4 @@
-package org.jire.netrune.codec.osrs.game.decoder209
+package org.jire.netrune.codec.osrs.game.v209.decode
 
 import org.jire.netrune.codec.VarBytePacketDecoder
 import org.jire.netrune.codec.osrs.game.incoming.Command
