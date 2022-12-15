@@ -68,8 +68,9 @@ include(
     "codec-js5",
     "codec-js5-osrs",
 
-    "codec-osrs-game",
-    "codec-osrs-game-r209",
+    "codec-game",
+    "codec-game-osrs",
+    "codec-game-osrs-v209",
 
     "cache",
     "server",

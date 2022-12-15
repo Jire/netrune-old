@@ -30,10 +30,11 @@
             <option value="$PROJECT_DIR$/bytes" />
             <option value="$PROJECT_DIR$/cache" />
             <option value="$PROJECT_DIR$/codec" />
+            <option value="$PROJECT_DIR$/codec-game" />
+            <option value="$PROJECT_DIR$/codec-game-osrs" />
+            <option value="$PROJECT_DIR$/codec-game-osrs-v209" />
             <option value="$PROJECT_DIR$/codec-js5" />
             <option value="$PROJECT_DIR$/codec-js5-osrs" />
-            <option value="$PROJECT_DIR$/codec-osrs-game" />
-            <option value="$PROJECT_DIR$/codec-osrs-game-r209" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/logging" />
             <option value="$PROJECT_DIR$/net" />
