@@ -72,4 +72,6 @@ abstract class SteppedBufferDecoder : BufferDecoder {
     val string get() = +::ReadableBufferStringDelegate
     val versionedString get() = +::ReadableBufferVersionedStringDelegate
 
+    fun skipBytes(length: Int) = ReadableBufferSkipDelegate(length)
+
 }

@@ -53,4 +53,6 @@ interface ReadableBuffer : Buffer {
     fun string(): String
     fun versionedString(): String
 
+    fun skipBytes(length: Int)
+
 }

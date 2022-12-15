@@ -55,4 +55,8 @@ interface Netty4ReadableBuffer : Netty4Buffer, ReadableBuffer {
     override fun string(): String = byteBuf.readString()
     override fun versionedString(): String = byteBuf.readVersionedString()
 
+    override fun skipBytes(length: Int) {
+        byteBuf.skipBytes(length)
+    }
+
 }
