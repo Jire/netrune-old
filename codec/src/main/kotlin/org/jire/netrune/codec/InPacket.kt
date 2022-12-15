@@ -1,3 +1,3 @@
 package org.jire.netrune.codec
 
-interface InPacket
+interface InPacket : Packet
