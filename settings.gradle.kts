@@ -72,6 +72,10 @@ include(
     "codec-game-osrs",
     "codec-game-osrs-v209",
 
+    "codec-login",
+    "codec-login-osrs",
+    "codec-login-osrs-v209",
+
     "cache",
     "server",
 )

@@ -35,6 +35,9 @@
             <option value="$PROJECT_DIR$/codec-game-osrs-v209" />
             <option value="$PROJECT_DIR$/codec-js5" />
             <option value="$PROJECT_DIR$/codec-js5-osrs" />
+            <option value="$PROJECT_DIR$/codec-login" />
+            <option value="$PROJECT_DIR$/codec-login-osrs" />
+            <option value="$PROJECT_DIR$/codec-login-osrs-v209" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/logging" />
             <option value="$PROJECT_DIR$/net" />
