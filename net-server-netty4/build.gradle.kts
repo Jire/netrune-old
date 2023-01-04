@@ -9,6 +9,8 @@ dependencies {
 
     api(projects.netServer)
     api(projects.netNetty4)
+
+    api(projects.codecGameOsrsV209)
 }
 
 application {
