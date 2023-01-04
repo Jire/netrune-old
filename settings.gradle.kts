@@ -11,8 +11,8 @@ plugins {
 
 versionCatalog {
     dependencies {
-        "fastutil"("it.unimi.dsi", "8.5.9")
-        "runelite-cache"("net.runelite", "1.9.5", "cache")
+        "fastutil"("it.unimi.dsi", "8.5.11")
+        "runelite-cache"("net.runelite", "1.9.6", "cache")
 
         group("io.netty", "netty", "4.1.86.Final") {
             "netty-buffer"()
@@ -37,7 +37,7 @@ versionCatalog {
             "openrs2-crypto"()
         }
 
-        group("org.jetbrains.kotlin", "kotlin", "1.8.0-RC") {
+        group("org.jetbrains.kotlin", "kotlin", "1.8.0") {
             "kotlin-scripting-common"()
             "kotlin-script-runtime"()
         }
@@ -52,6 +52,7 @@ versionCatalog {
 include(
     "logging",
     "common",
+    "threads",
 
     "bytes",
     "codec",
@@ -75,6 +76,8 @@ include(
     "codec-login",
     "codec-login-osrs",
     "codec-login-osrs-v209",
+
+    "gpi",
 
     "cache",
     "server",
