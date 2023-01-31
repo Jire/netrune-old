@@ -29,9 +29,9 @@ internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
     versionCatalog {
         dependencies {
             "fastutil"("it.unimi.dsi", "8.5.11")
-            "runelite-cache"("net.runelite", "1.9.6", "cache")
+            "runelite-cache"("net.runelite", "1.9.8", "cache")
 
-            group("io.netty", "netty", "4.1.86.Final") {
+            group("io.netty", "netty", "4.1.87.Final") {
                 "netty-buffer"()
                 "netty-codec"()
                 "netty-handler"()
@@ -46,15 +46,15 @@ internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
                 "netty-incubator-transport-native-io_uring"
             )
 
-            "chronicle-core"("net.openhft", "2.23.37")
-            "chronicle-bytes"("net.openhft", "2.23.33")
+            "chronicle-core"("net.openhft", "2.24ea5")
+            "chronicle-bytes"("net.openhft", "2.24ea3")
 
             group("org.openrs2", "openrs2", "0.1.0-SNAPSHOT") {
                 "openrs2-buffer"()
                 "openrs2-crypto"()
             }
 
-            group("org.jetbrains.kotlin", "kotlin", "1.8.0") {
+            group("org.jetbrains.kotlin", "kotlin", kotlinVersion) {
                 "kotlin-scripting-common"()
                 "kotlin-script-runtime"()
             }

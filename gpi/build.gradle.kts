@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     netrune
-    id("me.champeau.jmh") version "0.6.8"
+    id("me.champeau.jmh")
 }
 
 dependencies {
@@ -11,11 +11,7 @@ dependencies {
     api(projects.netServer)
     api(projects.netNetty4)
 
-    implementation("net.openhft:affinity:3.23.2")
-    //implementation(libs.chronicle.core)
-    implementation("net.openhft:chronicle-core:2.24ea3")
-    val jmh = "1.36"
-    implementation("org.openjdk.jmh:jmh-core:$jmh")
+    implementation(libs.chronicle.core)
 
     runtimeOnly(libs.slf4j.simple)
 }
