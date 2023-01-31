@@ -45,6 +45,7 @@
             <option value="$PROJECT_DIR$/net-netty4" />
             <option value="$PROJECT_DIR$/net-server" />
             <option value="$PROJECT_DIR$/net-server-netty4" />
+            <option value="$PROJECT_DIR$/rsa" />
             <option value="$PROJECT_DIR$/server" />
             <option value="$PROJECT_DIR$/threads" />
           </set>
