@@ -21,6 +21,7 @@ include(
 
     "buffer",
     "buffer-netty4",
+    "buffer-panama",
 
     "net",
     "net-netty4",

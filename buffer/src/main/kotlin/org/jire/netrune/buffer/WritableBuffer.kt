@@ -2,35 +2,35 @@ package org.jire.netrune.buffer
 
 interface WritableBuffer : Buffer {
 
-    fun byte(value: Int)
-    fun byteA(value: Int)
-    fun byteC(value: Int)
-    fun byteS(value: Int)
+    fun writeByte(value: Int)
+    fun writeByteA(value: Int)
+    fun writeByteC(value: Int)
+    fun writeByteS(value: Int)
 
-    fun short(value: Int)
-    fun shortA(value: Int)
-    fun shortC(value: Int)
-    fun shortS(value: Int)
+    fun writeShort(value: Int)
+    fun writeShortA(value: Int)
+    fun writeShortC(value: Int)
+    fun writeShortS(value: Int)
 
-    fun shortLe(value: Int)
-    fun shortLeA(value: Int)
-    fun shortLeC(value: Int)
-    fun shortLeS(value: Int)
+    fun writeShortLe(value: Int)
+    fun writeShortLeA(value: Int)
+    fun writeShortLeC(value: Int)
+    fun writeShortLeS(value: Int)
 
-    fun int(value: Int)
-    fun intLe(value: Int)
-    fun intAlt3(value: Int)
-    fun intAlt3Reversed(value: Int)
+    fun writeInt(value: Int)
+    fun writeIntLe(value: Int)
+    fun writeIntAlt3(value: Int)
+    fun writeIntAlt3Reversed(value: Int)
 
-    fun varInt(value: Int)
+    fun writeVarInt(value: Int)
 
-    fun intSmart(value: Int)
-    fun uIntSmart(value: Int)
+    fun writeIntSmart(value: Int)
+    fun writeUIntSmart(value: Int)
 
-    fun long(value: Long)
-    fun longLe(value: Long)
+    fun writeLong(value: Long)
+    fun writeLongLe(value: Long)
 
-    fun string(value: CharSequence)
-    fun versionedString(value: CharSequence)
+    fun writeString(value: CharSequence)
+    fun writeVersionedString(value: CharSequence)
 
 }

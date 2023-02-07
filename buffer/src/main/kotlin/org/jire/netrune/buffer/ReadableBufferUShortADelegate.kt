@@ -7,7 +7,7 @@ class ReadableBufferUShortADelegate : ReadableBufferDelegate {
     var value = Int.MIN_VALUE
 
     override fun read(buffer: ReadableBuffer) {
-        value = buffer.uShortA()
+        value = buffer.readUShortA()
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>) = value

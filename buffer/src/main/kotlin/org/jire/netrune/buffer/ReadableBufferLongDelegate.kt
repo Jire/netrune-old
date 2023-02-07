@@ -7,7 +7,7 @@ class ReadableBufferLongDelegate : ReadableBufferDelegate {
     var value = Long.MIN_VALUE
 
     override fun read(buffer: ReadableBuffer) {
-        value = buffer.long()
+        value = buffer.readLong()
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>) = value

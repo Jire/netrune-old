@@ -7,4 +7,10 @@ interface Netty4Buffer : Buffer {
 
     val byteBuf: ByteBuf
 
+    override fun has(bytes: Int) = byteBuf.isReadable(bytes)
+
+    override fun close() {
+        byteBuf.release()
+    }
+
 }

@@ -7,7 +7,7 @@ class ReadableBufferIntLeDelegate : ReadableBufferDelegate {
     var value = Int.MIN_VALUE
 
     override fun read(buffer: ReadableBuffer) {
-        value = buffer.intLe()
+        value = buffer.readIntLe()
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>) = value

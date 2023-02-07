@@ -7,7 +7,7 @@ class ReadableBufferVersionedStringDelegate : ReadableBufferDelegate {
     lateinit var value: String
 
     override fun read(buffer: ReadableBuffer) {
-        value = buffer.versionedString()
+        value = buffer.readVersionedString()
     }
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>) = value

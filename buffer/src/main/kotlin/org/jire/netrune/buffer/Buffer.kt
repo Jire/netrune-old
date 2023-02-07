@@ -1,3 +1,7 @@
 package org.jire.netrune.buffer
 
-interface Buffer
+interface Buffer : AutoCloseable {
+
+    fun has(bytes: Int): Boolean
+
+}

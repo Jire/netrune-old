@@ -5,95 +5,95 @@ import org.openrs2.buffer.*
 
 interface Netty4WritableBuffer : Netty4Buffer, WritableBuffer {
 
-    override fun byte(value: Int) {
+    override fun writeByte(value: Int) {
         byteBuf.writeByte(value)
     }
 
-    override fun byteA(value: Int) {
+    override fun writeByteA(value: Int) {
         byteBuf.writeByteA(value)
     }
 
-    override fun byteC(value: Int) {
+    override fun writeByteC(value: Int) {
         byteBuf.writeByteC(value)
     }
 
-    override fun byteS(value: Int) {
+    override fun writeByteS(value: Int) {
         byteBuf.writeByteS(value)
     }
 
-    override fun short(value: Int) {
+    override fun writeShort(value: Int) {
         byteBuf.writeShort(value)
     }
 
-    override fun shortA(value: Int) {
+    override fun writeShortA(value: Int) {
         byteBuf.writeShortA(value)
     }
 
-    override fun shortC(value: Int) {
+    override fun writeShortC(value: Int) {
         byteBuf.writeShortC(value)
     }
 
-    override fun shortS(value: Int) {
+    override fun writeShortS(value: Int) {
         byteBuf.writeShortS(value)
     }
 
-    override fun shortLe(value: Int) {
+    override fun writeShortLe(value: Int) {
         byteBuf.writeShortLE(value)
     }
 
-    override fun shortLeA(value: Int) {
+    override fun writeShortLeA(value: Int) {
         byteBuf.writeShortLEA(value)
     }
 
-    override fun shortLeC(value: Int) {
+    override fun writeShortLeC(value: Int) {
         byteBuf.writeShortLEC(value)
     }
 
-    override fun shortLeS(value: Int) {
+    override fun writeShortLeS(value: Int) {
         byteBuf.writeShortLES(value)
     }
 
-    override fun int(value: Int) {
+    override fun writeInt(value: Int) {
         byteBuf.writeInt(value)
     }
 
-    override fun intLe(value: Int) {
+    override fun writeIntLe(value: Int) {
         byteBuf.writeIntLE(value)
     }
 
-    override fun intAlt3(value: Int) {
+    override fun writeIntAlt3(value: Int) {
         byteBuf.writeIntAlt3(value)
     }
 
-    override fun intAlt3Reversed(value: Int) {
+    override fun writeIntAlt3Reversed(value: Int) {
         byteBuf.writeIntAlt3Reverse(value)
     }
 
-    override fun varInt(value: Int) {
+    override fun writeVarInt(value: Int) {
         byteBuf.writeVarInt(value)
     }
 
-    override fun intSmart(value: Int) {
+    override fun writeIntSmart(value: Int) {
         byteBuf.writeIntSmart(value)
     }
 
-    override fun uIntSmart(value: Int) {
+    override fun writeUIntSmart(value: Int) {
         byteBuf.writeUnsignedIntSmart(value)
     }
 
-    override fun long(value: Long) {
+    override fun writeLong(value: Long) {
         byteBuf.writeLong(value)
     }
 
-    override fun longLe(value: Long) {
+    override fun writeLongLe(value: Long) {
         byteBuf.writeLongLE(value)
     }
 
-    override fun string(value: CharSequence) {
+    override fun writeString(value: CharSequence) {
         byteBuf.writeString(value)
     }
 
-    override fun versionedString(value: CharSequence) {
+    override fun writeVersionedString(value: CharSequence) {
         byteBuf.writeVersionedString(value)
     }
 
