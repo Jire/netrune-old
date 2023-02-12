@@ -3,7 +3,7 @@ import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.maven
 import org.gradle.kotlin.dsl.version
 
-const val DEFAULT_KOTLIN_VERSION = "1.8.0"
+const val DEFAULT_KOTLIN_VERSION = "1.8.20-Beta"
 
 @Suppress("UnstableApiUsage")
 internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
