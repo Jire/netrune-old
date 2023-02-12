@@ -8,7 +8,7 @@ abstract class VarShortPacketDecoder(
     init {
         steps.completable {
             if (input.has(2)) {
-                size = input.uShort()
+                size = input.readUShort()
                 done()
             }
         }

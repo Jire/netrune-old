@@ -5,6 +5,47 @@ import org.openrs2.buffer.*
 
 interface Netty4ReadableBuffer : Netty4Buffer, ReadableBuffer {
 
+    override fun getByte(index: Int): Byte = byteBuf.getByte(index)
+    override fun getByteA(index: Int): Byte = byteBuf.getByteA(index)
+    override fun getByteC(index: Int): Byte = byteBuf.getByteC(index)
+    override fun getByteS(index: Int): Byte = byteBuf.getByteS(index)
+
+    override fun getUByte(index: Int): Short = byteBuf.getUnsignedByte(index)
+    override fun getUByteA(index: Int): Short = byteBuf.getUnsignedByteA(index)
+    override fun getUByteC(index: Int): Short = byteBuf.getUnsignedByteC(index)
+    override fun getUByteS(index: Int): Short = byteBuf.getUnsignedByteS(index)
+
+    override fun getShort(index: Int): Short = byteBuf.getShort(index)
+    override fun getShortA(index: Int): Short = byteBuf.getShortA(index)
+    override fun getShortC(index: Int): Short = byteBuf.getShortC(index)
+    override fun getShortS(index: Int): Short = byteBuf.getShortS(index)
+
+    override fun getUShort(index: Int): Int = byteBuf.getUnsignedShort(index)
+    override fun getUShortA(index: Int): Int = byteBuf.getUnsignedShortA(index)
+    override fun getUShortC(index: Int): Int = byteBuf.getUnsignedShortC(index)
+    override fun getUShortS(index: Int): Int = byteBuf.getUnsignedShortS(index)
+
+    override fun getShortLe(index: Int): Short = byteBuf.getShortLE(index)
+    override fun getShortLeA(index: Int): Short = byteBuf.getShortLEA(index)
+    override fun getShortLeC(index: Int): Short = byteBuf.getShortLEC(index)
+    override fun getShortLeS(index: Int): Short = byteBuf.getShortLES(index)
+
+    override fun getUShortLe(index: Int): Int = byteBuf.getUnsignedShortLE(index)
+    override fun getUShortLeA(index: Int): Int = byteBuf.getUnsignedShortLEA(index)
+    override fun getUShortLeC(index: Int): Int = byteBuf.getUnsignedShortLEC(index)
+    override fun getUShortLeS(index: Int): Int = byteBuf.getUnsignedShortLES(index)
+
+    override fun getInt(index: Int): Int = byteBuf.getInt(index)
+    override fun getIntLe(index: Int): Int = byteBuf.getIntLE(index)
+    override fun getIntAlt3(index: Int): Int = byteBuf.getIntAlt3(index)
+    override fun getIntAlt3Reversed(index: Int): Int = byteBuf.getIntAlt3Reverse(index)
+
+    override fun getUInt(index: Int): Long = byteBuf.getUnsignedInt(index)
+    override fun getUIntLe(index: Int): Long = byteBuf.getUnsignedIntLE(index)
+
+    override fun getLong(index: Int): Long = byteBuf.getLong(index)
+    override fun getLongLe(index: Int): Long = byteBuf.getLongLE(index)
+
     override fun readByte(): Byte = byteBuf.readByte()
     override fun readByteA(): Byte = byteBuf.readByteA()
     override fun readByteC(): Byte = byteBuf.readByteC()

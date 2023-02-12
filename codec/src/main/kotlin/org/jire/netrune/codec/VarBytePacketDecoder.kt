@@ -8,7 +8,7 @@ abstract class VarBytePacketDecoder(
     init {
         steps.completable {
             if (input.has(1)) {
-                size = input.uByte()
+                size = input.readUByte().toInt()
                 done()
             }
         }

@@ -40,12 +40,8 @@ interface ReadableBuffer : Buffer {
     fun getUInt(index: Int): Long
     fun getUIntLe(index: Int): Long
 
-    fun getVarInt(index: Int): Int
-    fun getIntSmart(index: Int): Int
-    fun getUIntSmart(index: Int): Int
-
     fun getLong(index: Int): Long
-    fun getLongLe(index: Long): Long
+    fun getLongLe(index: Int): Long
 
     fun readByte(): Byte
     fun readByteA(): Byte

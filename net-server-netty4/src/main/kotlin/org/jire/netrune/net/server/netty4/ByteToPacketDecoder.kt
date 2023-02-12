@@ -29,12 +29,12 @@ class ByteToPacketDecoder : ByteToMessageDecoder() {
 
         init {
             step {
-                val opcode = input.uByte()
+                val opcode = input.readUByte()
                 println("opcode: $opcode")
             }
             steps.completable {
                 if (input.has(4)) {
-                    val build = input.int()
+                    val build = input.readInt()
                     println("build is: $build")
 
                     ctx.writeAndFlush(ctx.alloc().fixedBuffer(1).writeByte(0), ctx.voidPromise())
@@ -51,6 +51,8 @@ class ByteToPacketDecoder : ByteToMessageDecoder() {
 
     override fun decode(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>) {
         CommandDecoder().decode()
+
+        val decoder = decoder
         decoder.input.byteBuf = input
         decoder.out = out
         decoder.ctx = ctx
