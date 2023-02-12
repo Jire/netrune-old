@@ -2,6 +2,9 @@ package org.jire.netrune.buffer
 
 interface WritableBuffer : Buffer {
 
+    fun setByte(index: Int, value: Int)
+    fun setShort(index: Int, value: Int)
+
     fun writeByte(value: Int)
     fun writeByteA(value: Int)
     fun writeByteC(value: Int)

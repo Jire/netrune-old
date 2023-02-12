@@ -5,6 +5,14 @@ import org.openrs2.buffer.*
 
 interface Netty4WritableBuffer : Netty4Buffer, WritableBuffer {
 
+    override fun setByte(index: Int, value: Int) {
+        byteBuf.setByte(index, value)
+    }
+
+    override fun setShort(index: Int, value: Int) {
+        byteBuf.setShort(index, value)
+    }
+
     override fun writeByte(value: Int) {
         byteBuf.writeByte(value)
     }
