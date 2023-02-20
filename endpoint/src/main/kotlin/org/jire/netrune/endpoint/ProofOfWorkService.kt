@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 
 class ProofOfWorkService(
-    private val connectData: ConnectData
+    private val connectData: ConnectData?
 ) : Service {
 
     private var length = -1

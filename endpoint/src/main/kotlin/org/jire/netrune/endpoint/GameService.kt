@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 
 class GameService(
-    private val connectData: ConnectData,
+    private val connectData: ConnectData?,
 ) : Service {
 
     override fun init(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>): Boolean {

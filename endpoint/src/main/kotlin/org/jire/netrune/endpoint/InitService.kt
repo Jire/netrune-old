@@ -15,8 +15,8 @@ class InitService(
             SESSION_OPCODE -> SessionService
             JS5_OPCODE -> Js5Service(js5Responses)
             LOGIN_OPCODE -> ConnectService()
-            RECONNECT_OPCODE -> ReconnectService
-            PROOF_OF_WORK_OPCODE -> ProofOfWorkService
+            RECONNECT_OPCODE -> ReconnectService()
+            PROOF_OF_WORK_OPCODE -> ProofOfWorkService(null)
             else -> throw DecoderException("Unsupported service opcode: $opcode")
         }
     }
