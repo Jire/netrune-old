@@ -67,7 +67,7 @@ internal class TarnishPSStresserChannelHandler(
     }
 
     private fun encodeRSA(alloc: ByteBufAllocator): ByteArray {
-        val rsa = alloc.heapBuffer()
+        val rsa = alloc.buffer()
             .writeByte(10) // rsa
             .writeZero(4 * 5) // seed (client writes last value twice)
             .writeInt(0) // uid
@@ -79,7 +79,7 @@ internal class TarnishPSStresserChannelHandler(
         rsa.readBytes(rsaArray)
         rsa.release()
         return BigInteger(rsaArray)
-            .modPow(RSA_EXPONENT, RSA_MODULUS)
+            .modPow(rsaExponent, rsaModulus)
             .toByteArray()
     }
 
@@ -131,13 +131,13 @@ internal class TarnishPSStresserChannelHandler(
             writeByte(STRING_DELIMITER_317)
         }
 
-        val RSA_MODULUS = BigInteger(
+        val rsaModulus = BigInteger(
             "q7ndelupow1ltu1gayjozuv94jcy8vg9z7pkkornnmzt7v49l2148ensr5rgxk11fmsezyhkvfdo3b5sf7rvp4xbqrtet0hgsexlgpd7nbqudf6m6w0901l03gzinj5she4dvetj9q46mpe3xexama61bmr32ko84vzpkiyydvervetra7k2pss2oq25ao6muysq15",
             Character.MAX_RADIX
         )
-        val RSA_EXPONENT = BigInteger("10001", 16)
+        val rsaExponent: BigInteger = BigInteger.valueOf(65537)
 
-        val handshakeBuf = Unpooled.directBuffer(2, 2)
+        val handshakeBuf: ByteBuf = Unpooled.directBuffer(2, 2)
             .writeByte(LOGIN_HANDSHAKE)
             .writeByte(0) // nameHash
     }
