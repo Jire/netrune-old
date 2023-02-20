@@ -9,6 +9,7 @@ dependencies {
 
     implementation(libs.fastutil)
     implementation(libs.openrs2.cache)
+    implementation("com.google.code.gson:gson:2.10.1")
 
     runtimeOnly(libs.slf4j.simple)
 }

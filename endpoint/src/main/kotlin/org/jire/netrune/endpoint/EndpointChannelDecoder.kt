@@ -13,17 +13,18 @@ class EndpointChannelDecoder(
 
     override fun channelActive(ctx: ChannelHandlerContext) {
         val channel = ctx.channel()
-        logger.info("Channel active (remote={}, local={})", channel.remoteAddress(), channel.localAddress())
+        logger.debug("Channel active (remote={}, local={})", channel.remoteAddress(), channel.localAddress())
 
         ctx.read() // interested in decoding
     }
 
     override fun decode(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>) {
-        val newService = service.decode(ctx, input, out)
-        logger.info("New service: {}", newService::class.simpleName)
-        if (service != newService && newService.init(ctx, input, out)) {
+        val oldService = service
+        val newService = oldService.decode(ctx, input, out)
+        logger.trace("old: \"{}\", new: \"{}\"", oldService::class.simpleName, newService::class.simpleName)
+        if (oldService != newService && newService.init(ctx, input, out)) {
             service = newService
-            logger.info("Switched to new service: {}", newService::class.simpleName)
+            logger.debug("Switched to new service: {}", newService::class.simpleName)
         }
     }
 

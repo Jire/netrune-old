@@ -13,6 +13,8 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        Xteas.load()
+
         val store: Store = DiskStore.open(storePath)
         val masterIndex = Js5MasterIndex.create(store)
         val js5Responses: Js5Responses = Openrs2Js5Responses(store, masterIndex)

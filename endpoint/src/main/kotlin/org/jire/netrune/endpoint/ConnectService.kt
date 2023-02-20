@@ -11,6 +11,7 @@ open class ConnectService : Service {
         if (!input.isReadable(2)) return false
 
         length = input.readUnsignedShort()
+        ctx.read()
         return true
     }
 
@@ -22,6 +23,11 @@ open class ConnectService : Service {
         val encryptionType = input.readUnsignedByte().toInt() // 0 = rsa
         val encryptionLength = input.readUnsignedShort()
         val encryptionData = input.readBytes(encryptionLength)
+
+        val xteaBufLength = input.readableBytes()
+        val xteaBuf = input.readBytes(xteaBufLength)
+
+        //println("$version, $subVersion, $clientType, $jxType, $encryptionType, $encryptionLength, ${encryptionData.readableBytes()}")
 
         // TODO: verify connect data
 
