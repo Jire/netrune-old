@@ -1,5 +1,6 @@
 package org.jire.netrune.server
 
+import io.netty.channel.ChannelHandler
 import io.netty.channel.EventLoopGroup
 import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
 import org.jire.netrune.net.netty4.EventLoopGroupFactory
@@ -14,10 +15,14 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val childHandler: ChannelHandler = ServerChannelInitializer()
         val eventLoopGroupFactory: EventLoopGroupFactory = DefaultEventLoopGroupFactory
         val parentGroup: EventLoopGroup = eventLoopGroupFactory.eventLoopGroup(1)
         val childGroup: EventLoopGroup = eventLoopGroupFactory.eventLoopGroup()
-        val bootstrap = DefaultServerBootstrapFactory.serverBootstrap(parentGroup, childGroup)
+        val bootstrap = DefaultServerBootstrapFactory.serverBootstrap(
+            parentGroup, childGroup,
+            childHandler = childHandler
+        )
         Netty4Server(
             parentGroup, childGroup,
             bootstrap

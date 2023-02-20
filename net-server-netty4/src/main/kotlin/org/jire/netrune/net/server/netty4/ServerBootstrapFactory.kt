@@ -14,7 +14,7 @@ interface ServerBootstrapFactory {
         channelClassFactory: ServerSocketChannelClassFactory = DefaultServerSocketChannelClassFactory,
         channelClass: Class<out ServerChannel> = channelClassFactory.serverSocketChannelClass(parentGroup),
 
-        childHandler: ChannelHandler = ServerChannelInitializer()
+        childHandler: ChannelHandler
     ) = ServerBootstrap().apply {
         group(parentGroup, childGroup)
 

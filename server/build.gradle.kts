@@ -1,15 +1,15 @@
 plugins {
     netrune
+
     application
 }
 
 dependencies {
     implementation(projects.netServerNetty4)
-    runtimeOnly(libs.slf4j.simple)
+    implementation(projects.codecGameOsrsV209)
     implementation("com.displee:rs-cache-library:6.8.1")
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
-
+    runtimeOnly(libs.slf4j.simple)
 }
 
 application {
