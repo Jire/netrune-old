@@ -1,11 +1,11 @@
 package org.jire.netrune.net.client
 
-import java.net.InetSocketAddress
+import java.net.SocketAddress
 import java.util.concurrent.Future
 
 interface Client : AutoCloseable {
 
-    fun connect(remoteAddress: InetSocketAddress): ClientBinding
+    fun connect(remoteAddress: SocketAddress): ClientBinding
 
     fun shutdown(): List<Future<*>>
 
