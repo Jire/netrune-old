@@ -13,6 +13,8 @@ dependencies {
 
     implementation(libs.chronicle.core)
 
+    implementation(projects.bufferPanama)
+
     runtimeOnly(libs.slf4j.simple)
 }
 

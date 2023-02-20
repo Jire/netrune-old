@@ -15,11 +15,26 @@ class LocalPlayer : LocalAvatar {
         private set
 
     val data = BitBuf(Unpooled.directBuffer(1024))
+    val packet = BitBuf(Unpooled.directBuffer(1024))
 
     override fun prepare(avatar: Avatar) {
+        val data = this.data
         data.writeBoolean(isUpdated)
         data.writeBoolean(avatar.extensions.isUpdated)
 
+        preparePlacement(
+            data,
+            avatar
+        )
+    }
+
+    override fun build(avatar: Avatar) {
+    }
+
+    private fun preparePlacement(
+        data: BitBuf,
+        avatar: Avatar
+    ) {
         val (y, x, z) = avatar.position
         val (py, px, pz) = avatar.previousPosition
 
@@ -29,27 +44,44 @@ class LocalPlayer : LocalAvatar {
 
         val move = dy != 0 || dx != 0 || dz != 0
 
-        if (move) prepareMove(avatar.teleported, dy, dx, dz)
+        if (move) prepareMove(
+            data,
+            avatar.teleported, dy, dx, dz
+        )
     }
 
-    private fun prepareMove(teleported: Boolean, dy: Int, dx: Int, dz: Int) {
+    private fun prepareMove(
+        data: BitBuf,
+        teleported: Boolean, dy: Int, dx: Int, dz: Int
+    ) {
         val ay = fastAbs(dy)
         val ax = fastAbs(dx)
         val az = fastAbs(dz)
 
         val teleport = teleported || ay != 0 || ax > 2 || az > 2
         data.writeBoolean(teleport)
-        if (teleport) prepareTeleport(ax > 15 || az > 15, dy, dx, dz)
-        else prepareWalk(ax > 1 || az > 1, dx, dz)
+        if (teleport) prepareTeleport(
+            data,
+            ax > 15 || az > 15, dy, dx, dz
+        ) else prepareWalk(
+            data,
+            ax > 1 || az > 1, dx, dz
+        )
     }
 
-    private fun prepareWalk(run: Boolean, dx: Int, dz: Int) {
+    private fun prepareWalk(
+        data: BitBuf,
+        run: Boolean, dx: Int, dz: Int
+    ) {
         data.writeBoolean(run)
         if (run) data.writeBits(4, dualTileMovementDirection(dx, dz))
         else data.writeBits(3, singleTileMovementDirection(dx, dz))
     }
 
-    private fun prepareTeleport(far: Boolean, dy: Int, dx: Int, dz: Int) {
+    private fun prepareTeleport(
+        data: BitBuf,
+        far: Boolean, dy: Int, dx: Int, dz: Int
+    ) {
         data.writeBoolean(far)
         data.writeBits(2, dy and 0b111)
         val dBits = if (far) 14 else 5

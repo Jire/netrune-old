@@ -23,6 +23,7 @@ class SayPlayerExtension : SayAvatarExtension {
     }
 
     override fun prepare() {
+        val data = this.data
         data.clear()
         data.writeString(message)
     }

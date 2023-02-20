@@ -6,4 +6,6 @@ interface LocalAvatar {
 
     fun prepare(avatar: Avatar)
 
+    fun build(avatar: Avatar)
+
 }

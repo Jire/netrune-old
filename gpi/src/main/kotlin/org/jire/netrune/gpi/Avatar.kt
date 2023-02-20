@@ -14,10 +14,22 @@ interface Avatar {
 
     val extensions: AvatarExtensions
 
-    fun prepare()
+    var hasMovementPending: Boolean
 
-    fun build()
+    var plane: Int
 
-    fun complete()
+    var x: Int
+    var y: Int
+
+    var tileX: Int
+    var tileY: Int
+
+    val pathX: IntArray
+    val pathY: IntArray
+
+    var orientation: Int
+    var movingOrientation: Int
+
+    var targetIndex: Int
 
 }
