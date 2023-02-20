@@ -43,11 +43,14 @@
             <option value="$PROJECT_DIR$/gpi" />
             <option value="$PROJECT_DIR$/logging" />
             <option value="$PROJECT_DIR$/net" />
+            <option value="$PROJECT_DIR$/net-client" />
+            <option value="$PROJECT_DIR$/net-client-netty4" />
             <option value="$PROJECT_DIR$/net-netty4" />
             <option value="$PROJECT_DIR$/net-server" />
             <option value="$PROJECT_DIR$/net-server-netty4" />
             <option value="$PROJECT_DIR$/rsa" />
             <option value="$PROJECT_DIR$/server" />
+            <option value="$PROJECT_DIR$/stresser" />
             <option value="$PROJECT_DIR$/threads" />
           </set>
         </option>

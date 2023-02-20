@@ -29,6 +29,9 @@ include(
     "net-server",
     "net-server-netty4",
 
+    "net-client",
+    "net-client-netty4",
+
     "codec-js5",
     "codec-js5-osrs",
 
@@ -44,4 +47,6 @@ include(
 
     "cache",
     "server",
+
+    "stresser",
 )

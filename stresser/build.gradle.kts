@@ -4,12 +4,11 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.netServerNetty4)
+    api(projects.codec)
+
+    api(projects.netNetty4)
+
     runtimeOnly(libs.slf4j.simple)
-    implementation("com.displee:rs-cache-library:6.8.1")
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
-
-
 }
 
 application {
