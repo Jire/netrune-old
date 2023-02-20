@@ -6,8 +6,9 @@ plugins {
 
 dependencies {
     implementation(projects.netServerNetty4)
-    implementation(projects.codecGameOsrsV209)
-    implementation("com.displee:rs-cache-library:6.8.1")
+
+    implementation(libs.fastutil)
+    implementation(libs.openrs2.cache)
 
     runtimeOnly(libs.slf4j.simple)
 }

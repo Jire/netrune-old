@@ -52,6 +52,7 @@ internal fun Settings.netrune(kotlinVersion: String = DEFAULT_KOTLIN_VERSION) {
             group("org.openrs2", "openrs2", "0.1.0-SNAPSHOT") {
                 "openrs2-buffer"()
                 "openrs2-crypto"()
+                "openrs2-cache"()
             }
 
             group("org.jetbrains.kotlin", "kotlin", kotlinVersion) {

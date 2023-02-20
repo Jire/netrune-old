@@ -1,40 +1,25 @@
 package org.jire.netrune.endpoint
 
-import io.netty.channel.ChannelHandler
-import io.netty.channel.EventLoopGroup
-import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
-import org.jire.netrune.net.netty4.EventLoopGroupFactory
-import org.jire.netrune.net.server.netty4.DefaultServerBootstrapFactory
-import org.jire.netrune.net.server.netty4.Netty4Server
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.jire.netrune.endpoint.js5.Js5Responses
+import org.openrs2.cache.DiskStore
+import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.Store
+import java.nio.file.Path
 
 object Main {
 
-    private const val PORT = 43594
+    private const val WORLD_ID = 1
+
+    private val storePath: Path = Path.of("data", "cache")
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val childHandler: ChannelHandler = ServerChannelInitializer()
-        val eventLoopGroupFactory: EventLoopGroupFactory = DefaultEventLoopGroupFactory
-        val parentGroup: EventLoopGroup = eventLoopGroupFactory.eventLoopGroup(1)
-        val childGroup: EventLoopGroup = eventLoopGroupFactory.eventLoopGroup()
-        val bootstrap = DefaultServerBootstrapFactory.serverBootstrap(
-            parentGroup, childGroup,
-            childHandler = childHandler
-        )
-        Netty4Server(
-            parentGroup, childGroup,
-            bootstrap
-        ).use { server ->
-            logger.info("Binding endpoint to port {}...", PORT)
-            val binding = server.bind(PORT)
-            binding.bindFuture.get()
-            logger.info("Endpoint bound to {}", binding.localAddress)
-            binding.channelCloseFuture.get()
+        val store: Store = DiskStore.open(storePath)
+        val masterIndex = Js5MasterIndex.create(store)
+        val js5Responses = Js5Responses(store, masterIndex)
+        Endpoint(js5Responses, WORLD_ID).use { endpoint ->
+            endpoint.run()
         }
     }
-
-    private val logger: Logger = LoggerFactory.getLogger(Main::class.java)
 
 }
