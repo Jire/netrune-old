@@ -49,4 +49,7 @@ include(
     "server",
 
     "stresser",
+    "stresser-netty4",
+
+    "stresser-tarnishps",
 )
