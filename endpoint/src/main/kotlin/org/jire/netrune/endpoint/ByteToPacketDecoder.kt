@@ -1,4 +1,4 @@
-package org.jire.netrune.server
+package org.jire.netrune.endpoint
 
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext

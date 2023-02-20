@@ -1,4 +1,4 @@
-package org.jire.netrune.server
+package org.jire.netrune.endpoint
 
 import io.netty.channel.ChannelHandler
 import io.netty.channel.EventLoopGroup
@@ -27,10 +27,10 @@ object Main {
             parentGroup, childGroup,
             bootstrap
         ).use { server ->
-            logger.info("Binding server to port {}...", PORT)
+            logger.info("Binding endpoint to port {}...", PORT)
             val binding = server.bind(PORT)
             binding.bindFuture.get()
-            logger.info("Server bound to {}", binding.localAddress)
+            logger.info("Endpoint bound to {}", binding.localAddress)
             binding.channelCloseFuture.get()
         }
     }

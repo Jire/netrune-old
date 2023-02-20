@@ -46,7 +46,7 @@ include(
     "gpi",
 
     "cache",
-    "server",
+    "endpoint",
 
     "stresser",
     "stresser-netty4",

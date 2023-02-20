@@ -13,7 +13,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.jire.netrune.server.Main")
+    mainClass.set("org.jire.netrune.endpoint.Main")
     applicationDefaultJvmArgs = listOf(
         "-XX:-OmitStackTraceInFastThrow",
         "--add-opens=java.base/java.time=ALL-UNNAMED",

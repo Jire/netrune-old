@@ -40,6 +40,7 @@
             <option value="$PROJECT_DIR$/codec-login-osrs" />
             <option value="$PROJECT_DIR$/codec-login-osrs-v209" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/endpoint" />
             <option value="$PROJECT_DIR$/gpi" />
             <option value="$PROJECT_DIR$/logging" />
             <option value="$PROJECT_DIR$/net" />
@@ -49,7 +50,6 @@
             <option value="$PROJECT_DIR$/net-server" />
             <option value="$PROJECT_DIR$/net-server-netty4" />
             <option value="$PROJECT_DIR$/rsa" />
-            <option value="$PROJECT_DIR$/server" />
             <option value="$PROJECT_DIR$/stresser" />
             <option value="$PROJECT_DIR$/stresser-netty4" />
             <option value="$PROJECT_DIR$/stresser-tarnishps" />
