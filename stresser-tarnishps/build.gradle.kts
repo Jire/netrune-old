@@ -11,7 +11,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.jire.netrune.stresser.tarnishps.StresserTarnishPS")
+    mainClass.set("org.jire.netrune.stresser.tarnishps.TarnishPSStresser")
     applicationDefaultJvmArgs = listOf(
         "-XX:-OmitStackTraceInFastThrow",
         "--add-opens=java.base/java.time=ALL-UNNAMED",
