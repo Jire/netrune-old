@@ -3,7 +3,6 @@ package org.jire.netrune.endpoint
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelOption
 import io.netty.channel.EventLoopGroup
-import org.jire.netrune.endpoint.js5.Js5Responses
 import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
 import org.jire.netrune.net.netty4.EventLoopGroupFactory
 import org.jire.netrune.net.server.ServerBinding
@@ -37,7 +36,7 @@ class Endpoint(
     )
 
     override fun run() {
-        js5Responses.preload()
+        js5Responses.load()
 
         val bindings = bindServer()
         bindings.forEach {

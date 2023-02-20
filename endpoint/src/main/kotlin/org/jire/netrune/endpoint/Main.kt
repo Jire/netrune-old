@@ -1,6 +1,5 @@
 package org.jire.netrune.endpoint
 
-import org.jire.netrune.endpoint.js5.Js5Responses
 import org.openrs2.cache.DiskStore
 import org.openrs2.cache.Js5MasterIndex
 import org.openrs2.cache.Store
@@ -16,7 +15,7 @@ object Main {
     fun main(args: Array<String>) {
         val store: Store = DiskStore.open(storePath)
         val masterIndex = Js5MasterIndex.create(store)
-        val js5Responses = Js5Responses(store, masterIndex)
+        val js5Responses: Js5Responses = Openrs2Js5Responses(store, masterIndex)
         Endpoint(js5Responses, WORLD_ID).use { endpoint ->
             endpoint.run()
         }
