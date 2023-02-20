@@ -1,2 +1,5 @@
 jdk:
-  - openjdk19
+  - oracle19
+before_install:
+  - sdk install java 19.0.2-oracle
+  - sdk use java 19.0.2-oracle
