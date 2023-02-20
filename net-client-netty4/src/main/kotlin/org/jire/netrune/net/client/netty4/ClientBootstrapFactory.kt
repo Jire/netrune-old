@@ -9,16 +9,11 @@ interface ClientBootstrapFactory {
 
     fun clientBootstrap(
         group: EventLoopGroup,
-
-        channelClassFactory: ClientSocketChannelClassFactory = DefaultClientSocketChannelClassFactory,
-        channelClass: Class<out Channel> = channelClassFactory.clientSocketChannelClass(group),
-
+        channelClass: Class<out Channel>,
         handler: ChannelHandler
     ) = Bootstrap().apply {
         group(group)
-
         channel(channelClass)
-
         handler(handler)
     }
 

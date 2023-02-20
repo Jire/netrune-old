@@ -1,10 +1,8 @@
 package org.jire.netrune.stresser.netty4
 
 import io.netty.bootstrap.Bootstrap
-import io.netty.channel.ChannelHandler
 import io.netty.channel.EventLoopGroup
 import org.jire.netrune.net.client.Client
-import org.jire.netrune.net.client.netty4.DefaultClientBootstrapFactory
 import org.jire.netrune.net.client.netty4.Netty4Client
 import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
 import org.jire.netrune.stresser.Stresser
@@ -14,13 +12,8 @@ import java.net.SocketAddress
 class Netty4Stresser(
     override val target: StresserTarget,
 
-    val handler: ChannelHandler,
-
-    val group: EventLoopGroup = DefaultEventLoopGroupFactory.eventLoopGroup(),
-    val bootstrap: Bootstrap = DefaultClientBootstrapFactory.clientBootstrap(
-        group,
-        handler = handler
-    )
+    private val group: EventLoopGroup = DefaultEventLoopGroupFactory.eventLoopGroup(),
+    private val bootstrap: Bootstrap
 ) : Stresser {
 
     private val address: SocketAddress = target.address
