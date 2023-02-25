@@ -6,6 +6,8 @@ import org.jire.netrune.endpoint.DecodeMessage
 import org.jire.netrune.endpoint.Rsa.rsa
 import org.jire.netrune.endpoint.Session
 import org.openrs2.buffer.readString
+import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.xteaDecrypt
 import java.util.concurrent.Executor
 
 class LoginService(
@@ -15,9 +17,8 @@ class LoginService(
     override fun handle(session: Session, ctx: ChannelHandlerContext, message: DecodeMessage) {
         when (message) {
             is LoginConnectMessage -> {
+                session.loginConnectMessage = message
                 executor.execute {
-                    // TODO: decode XTEA data to determine proof difficulty
-
                     val proofText = ProofOfWork.generateText()
                     session.proofText = proofText
                     val request = ProofOfWork.generateRequest(
@@ -39,7 +40,7 @@ class LoginService(
                     )
                     require(validated)
 
-                    // TODO: decode RSA data and pass to game server
+                    decodeRsa(session.loginConnectMessage)
                 }
             }
 
@@ -62,24 +63,26 @@ class LoginService(
         ctx.write(buf, ctx.voidPromise())
     }
 
-    fun handleRsa(message: LoginConnectMessage) {
-        when (message.encryptType) {
-            0 -> {
-                val data = message.encryptedData.rsa()
+    private fun decodeRsa(message: LoginConnectMessage) {
+        val encryptedData = message.encryptedData
+        try {
+            require(message.encryptType == 0)
 
+            val data = encryptedData.rsa()
+            try {
                 val check = data.readUnsignedByte().toInt()
                 require(check == 1)
 
-                val xteaKeys = IntArray(4) {
+                val clientSeed = IntArray(4) {
                     data.readInt()
                 }
                 val sessionId = data.readLong()
 
                 if (message.reconnect) {
-                    for (i in 0..xteaKeys.lastIndex) {
-                        val previousKey = data.readInt()
-                        val key = xteaKeys[i]
-                        require(previousKey == key)
+                    for (i in 0..clientSeed.lastIndex) {
+                        val previous = data.readInt()
+                        val current = clientSeed[i]
+                        require(previous == current)
                     }
                 }
 
@@ -101,11 +104,27 @@ class LoginService(
                 data.skipBytes(1)
 
                 val password = data.readString()
-            }
 
-            else -> throw UnsupportedOperationException(
-                "Unsupported encryption type: ${message.encryptType}"
+                decodeXtea(message, clientSeed)
+            } finally {
+                data.release()
+            }
+        } finally {
+            encryptedData.release()
+        }
+    }
+
+    private fun decodeXtea(message: LoginConnectMessage, clientSeed: IntArray) {
+        val xteaData = message.xteaData
+        try {
+            xteaData.xteaDecrypt(
+                0, message.xteaLength,
+                XteaKey(clientSeed[0], clientSeed[1], clientSeed[2], clientSeed[3])
             )
+
+            val username = xteaData.readString()
+        } finally {
+            xteaData.release()
         }
     }
 
