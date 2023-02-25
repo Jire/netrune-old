@@ -28,6 +28,11 @@ class SessionHandler(
         session.service.readComplete(session, ctx)
     }
 
+    override fun channelWritabilityChanged(ctx: ChannelHandlerContext) {
+        val session = session
+        session.service.writabilityChanged(session, ctx)
+    }
+
     override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
         if (evt is IdleStateEvent) {
             ctx.close()

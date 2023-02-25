@@ -14,4 +14,7 @@ interface Service {
         ctx.flush()
     }
 
+    fun writabilityChanged(session: Session, ctx: ChannelHandlerContext) {
+    }
+
 }
