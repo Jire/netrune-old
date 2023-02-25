@@ -11,8 +11,10 @@ class EndpointChannelInitializer(
     override fun initChannel(ch: SocketChannel) {
         val service: Service = InitService(js5Responses)
         val decoder: ChannelHandler = EndpointChannelDecoder(service)
+        val handler: ChannelHandler = EndpointChannelHandler()
         ch.pipeline()
             .addLast("decoder", decoder)
+            .addLast("handler", handler)
     }
 
 }

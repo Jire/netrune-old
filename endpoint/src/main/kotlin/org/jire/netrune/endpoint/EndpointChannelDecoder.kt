@@ -28,10 +28,6 @@ class EndpointChannelDecoder(
         }
     }
 
-    override fun channelReadComplete(ctx: ChannelHandlerContext) {
-        service.readComplete(ctx)
-    }
-
     @Suppress("OVERRIDE_DEPRECATION")
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
         logger.error("", cause)

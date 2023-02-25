@@ -17,7 +17,7 @@ class Js5Service(
         val serviceVersion = input.readInt()
         logger.trace("serviceVersion: {}", serviceVersion)
 
-        ctx.writeAndFlush(js5AcceptServiceBuf.retainedDuplicate(), ctx.voidPromise())
+        ctx.write(js5AcceptServiceBuf.retainedDuplicate(), ctx.voidPromise())
         ctx.read() // interested in requests
         return true
     }
