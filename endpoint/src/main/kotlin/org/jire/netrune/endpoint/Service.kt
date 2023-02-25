@@ -9,4 +9,7 @@ interface Service {
 
     fun decode(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>): Service = this
 
+    fun readComplete(ctx: ChannelHandlerContext) {
+    }
+
 }

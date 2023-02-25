@@ -40,7 +40,7 @@ class Js5Service(
                         group,
                         response.readableBytes()
                     )
-                ctx.writeAndFlush(response.retainedDuplicate(), ctx.voidPromise())
+                ctx.write(response.retainedDuplicate(), ctx.voidPromise())
             }
 
             2, 3, 4, 5, 6 -> input.skipBytes(3)
@@ -49,6 +49,10 @@ class Js5Service(
         }
 
         return this
+    }
+
+    override fun readComplete(ctx: ChannelHandlerContext) {
+        ctx.flush()
     }
 
     private companion object {
