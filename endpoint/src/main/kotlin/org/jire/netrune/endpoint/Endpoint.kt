@@ -8,8 +8,12 @@ import org.jire.netrune.net.netty4.EventLoopGroupFactory
 import org.jire.netrune.net.server.ServerBinding
 import org.jire.netrune.net.server.netty4.DefaultServerBootstrapFactory
 import org.jire.netrune.net.server.netty4.Netty4Server
+import org.openrs2.cache.DiskStore
+import org.openrs2.cache.Js5MasterIndex
+import org.openrs2.cache.Store
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.nio.file.Path
 
 class Endpoint(
     private val js5Responses: Js5Responses,
@@ -76,6 +80,35 @@ class Endpoint(
         const val JS5_PORT_BASE = 50000
 
         private val logger: Logger = LoggerFactory.getLogger(Endpoint::class.java)
+
+        private const val DEFAULT_WORLD_ID = 1
+
+        private val DEFAULT_STORE_PATH: Path = Path.of("data", "cache")
+
+        @JvmStatic
+        @JvmOverloads
+        fun createEndpoint(
+            worldID: Int = DEFAULT_WORLD_ID,
+            js5Responses: Js5Responses
+        ): Endpoint = Endpoint(js5Responses, worldID)
+
+        @JvmStatic
+        @JvmOverloads
+        fun createEndpoint(
+            worldID: Int = DEFAULT_WORLD_ID,
+            store: Store, masterIndex: Js5MasterIndex
+        ): Endpoint = createEndpoint(worldID, Openrs2Js5Responses(store, masterIndex))
+
+        @JvmStatic
+        @JvmOverloads
+        fun createEndpoint(
+            worldID: Int = DEFAULT_WORLD_ID,
+            storePath: Path = DEFAULT_STORE_PATH
+        ): Endpoint {
+            val store: Store = DiskStore.open(storePath)
+            val masterIndex = Js5MasterIndex.create(store)
+            return createEndpoint(worldID, store, masterIndex)
+        }
 
     }
 
