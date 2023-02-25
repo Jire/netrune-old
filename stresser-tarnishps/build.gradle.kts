@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.stresserNetty4)
+    api(projects.stresserNetty4)
 
     runtimeOnly(libs.slf4j.simple)
 }

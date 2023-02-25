@@ -11,9 +11,9 @@ dependencies {
     api(projects.netServer)
     api(projects.netNetty4)
 
-    implementation(libs.chronicle.core)
+    api(libs.chronicle.core)
 
-    implementation(projects.bufferPanama)
+    api(projects.bufferPanama)
 
     runtimeOnly(libs.slf4j.simple)
 }

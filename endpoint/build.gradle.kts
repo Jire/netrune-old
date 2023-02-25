@@ -5,11 +5,11 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.netServerNetty4)
+    api(projects.netServerNetty4)
 
-    implementation(libs.fastutil)
-    implementation(libs.openrs2.cache)
-    implementation("com.google.code.gson:gson:2.10.1")
+    api(libs.fastutil)
+    api(libs.openrs2.cache)
+    api("com.google.code.gson:gson:2.10.1")
 
     runtimeOnly(libs.slf4j.simple)
 }
