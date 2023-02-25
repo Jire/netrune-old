@@ -6,10 +6,12 @@ plugins {
 
 dependencies {
     api(projects.netServerNetty4)
+    api(libs.netty.handler)
 
     api(libs.fastutil)
     api(libs.openrs2.cache)
     api("com.google.code.gson:gson:2.10.1")
+    api("org.jctools:jctools-core:4.0.1")
 
     runtimeOnly(libs.slf4j.simple)
 }
