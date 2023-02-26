@@ -7,7 +7,6 @@ import org.jctools.queues.MessagePassingQueue
 import org.jctools.queues.SpscArrayQueue
 import org.jire.netrune.endpoint.AbstractService
 import org.jire.netrune.endpoint.IncomingMessage
-import org.jire.netrune.endpoint.Js5GroupRepository
 import org.jire.netrune.endpoint.Session
 import org.jire.netrune.endpoint.js5.incoming.*
 

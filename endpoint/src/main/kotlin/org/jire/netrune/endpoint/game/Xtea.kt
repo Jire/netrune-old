@@ -1,4 +1,4 @@
-package org.jire.netrune.endpoint
+package org.jire.netrune.endpoint.game
 
 data class Xtea(
     val mapsquare: Int,

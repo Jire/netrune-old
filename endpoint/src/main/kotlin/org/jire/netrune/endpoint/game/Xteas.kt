@@ -1,4 +1,4 @@
-package org.jire.netrune.endpoint
+package org.jire.netrune.endpoint.game
 
 import com.google.gson.Gson
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
@@ -10,9 +10,13 @@ object Xteas {
 
     private val map: Int2ObjectMap<Xtea> = Int2ObjectOpenHashMap()
 
-    fun load() {
-        val gson = Gson()
-        Path.of("data", "xteas.json").bufferedReader().use { reader ->
+    @JvmStatic
+    @JvmOverloads
+    fun load(
+        path: Path = Path.of("data", "xteas.json"),
+        gson: Gson = Gson()
+    ) {
+        path.bufferedReader().use { reader ->
             val xteas = gson.fromJson(reader, Array<Xtea?>::class.java)
             for (xtea in xteas) {
                 xtea ?: continue

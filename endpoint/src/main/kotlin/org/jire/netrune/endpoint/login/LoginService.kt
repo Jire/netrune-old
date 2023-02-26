@@ -3,8 +3,8 @@ package org.jire.netrune.endpoint.login
 import io.netty.channel.ChannelHandlerContext
 import org.jire.netrune.endpoint.AbstractService
 import org.jire.netrune.endpoint.IncomingMessage
-import org.jire.netrune.endpoint.Rsa.rsa
 import org.jire.netrune.endpoint.Session
+import org.jire.netrune.endpoint.login.Rsa.rsa
 import org.jire.netrune.endpoint.login.incoming.LoginConnect
 import org.jire.netrune.endpoint.login.incoming.LoginConnectDecoder
 import org.jire.netrune.endpoint.login.incoming.LoginProofOfWork

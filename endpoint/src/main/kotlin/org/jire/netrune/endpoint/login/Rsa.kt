@@ -1,4 +1,4 @@
-package org.jire.netrune.endpoint
+package org.jire.netrune.endpoint.login
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufUtil

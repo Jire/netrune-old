@@ -1,10 +1,10 @@
-package org.jire.netrune.endpoint
+package org.jire.netrune.endpoint.js5
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import org.jire.netrune.endpoint.Js5GroupRepository.Companion.bitpack
+import org.jire.netrune.endpoint.js5.Js5GroupRepository.Companion.bitpack
 import org.openrs2.buffer.use
 import org.openrs2.cache.*
 import org.openrs2.cache.Store.Companion.ARCHIVESET

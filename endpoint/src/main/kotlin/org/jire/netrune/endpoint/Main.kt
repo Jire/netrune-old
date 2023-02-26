@@ -1,7 +1,10 @@
 package org.jire.netrune.endpoint
 
 import io.netty.channel.EventLoopGroup
+import org.jire.netrune.endpoint.game.Xteas
 import org.jire.netrune.endpoint.init.InitService
+import org.jire.netrune.endpoint.js5.Js5GroupRepository
+import org.jire.netrune.endpoint.js5.Openrs2Js5GroupRepository
 import org.jire.netrune.net.netty4.DefaultEventLoopGroupFactory
 import org.jire.netrune.net.netty4.EventLoopGroupFactory
 import org.openrs2.cache.DiskStore

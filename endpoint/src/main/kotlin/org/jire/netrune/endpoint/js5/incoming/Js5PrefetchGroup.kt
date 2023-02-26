@@ -1,6 +1,6 @@
 package org.jire.netrune.endpoint.js5.incoming
 
-import org.jire.netrune.endpoint.Js5GroupRepository
+import org.jire.netrune.endpoint.js5.Js5GroupRepository
 
 @JvmInline
 value class Js5PrefetchGroup(
