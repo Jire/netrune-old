@@ -20,7 +20,6 @@ class SessionHandler(
 
     override fun channelRead0(ctx: ChannelHandlerContext, message: IncomingMessage) {
         val session = session
-        println("handle $message with service ${session.service.javaClass}")
         session.service.handle(session, ctx, message)
     }
 
