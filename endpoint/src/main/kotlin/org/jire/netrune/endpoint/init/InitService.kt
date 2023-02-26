@@ -3,7 +3,7 @@ package org.jire.netrune.endpoint.init
 import io.netty.channel.ChannelHandlerContext
 import org.jire.netrune.endpoint.AbstractService
 import org.jire.netrune.endpoint.IncomingMessage
-import org.jire.netrune.endpoint.Js5Responses
+import org.jire.netrune.endpoint.Js5GroupRepository
 import org.jire.netrune.endpoint.Session
 import org.jire.netrune.endpoint.init.incoming.InitJs5
 import org.jire.netrune.endpoint.init.incoming.InitJs5RequestDecoder
@@ -16,7 +16,7 @@ import org.openrs2.crypto.secureRandom
 import java.util.concurrent.Executor
 
 class InitService(
-    private val js5Responses: Js5Responses,
+    private val js5GroupRepository: Js5GroupRepository,
     private val executor: Executor
 ) : AbstractService(32) {
 
@@ -41,7 +41,7 @@ class InitService(
 
                 ctx.writeAndFlush(InitJs5Response.Proceed).addListener { future ->
                     if (future.isSuccess) {
-                        session.service = Js5Service(js5Responses)
+                        session.service = Js5Service(js5GroupRepository)
                         ctx.read()
                         ctx.channel().config().isAutoRead = true
                     }

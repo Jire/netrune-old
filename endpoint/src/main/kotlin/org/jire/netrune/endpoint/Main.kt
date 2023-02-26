@@ -25,10 +25,10 @@ object Main {
         val store: Store = DiskStore.open(storePath)
         val masterIndex: Js5MasterIndex = Js5MasterIndex.create(store)
 
-        val js5Responses: Js5Responses = Openrs2Js5Responses(store, masterIndex)
-        js5Responses.load()
+        val js5GroupRepository: Js5GroupRepository = Openrs2Js5GroupRepository(store, masterIndex)
+        js5GroupRepository.load()
 
-        val service: Service = InitService(js5Responses, loginExecutor)
+        val service: Service = InitService(js5GroupRepository, loginExecutor)
 
         val eventLoopGroupFactory: EventLoopGroupFactory = DefaultEventLoopGroupFactory
         val parentGroup: EventLoopGroup = eventLoopGroupFactory.eventLoopGroup(1)

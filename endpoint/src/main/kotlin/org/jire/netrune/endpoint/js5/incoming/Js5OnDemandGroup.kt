@@ -1,16 +1,16 @@
 package org.jire.netrune.endpoint.js5.incoming
 
-import org.jire.netrune.endpoint.Js5Responses
+import org.jire.netrune.endpoint.Js5GroupRepository
 
 @JvmInline
 value class Js5OnDemandGroup(
     val bitpack: Int
 ) : Js5Group {
 
-    constructor(archive: Int, group: Int) : this(Js5Responses.bitpack(archive, group))
+    constructor(archive: Int, group: Int) : this(Js5GroupRepository.bitpack(archive, group))
 
-    override val archive get() = Js5Responses.archive(bitpack)
+    override val archive get() = Js5GroupRepository.archive(bitpack)
 
-    override val group get() = Js5Responses.group(bitpack)
+    override val group get() = Js5GroupRepository.group(bitpack)
 
 }

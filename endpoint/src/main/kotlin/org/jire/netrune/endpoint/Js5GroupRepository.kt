@@ -2,7 +2,7 @@ package org.jire.netrune.endpoint
 
 import io.netty.buffer.ByteBuf
 
-interface Js5Responses {
+interface Js5GroupRepository {
 
     fun load()
 

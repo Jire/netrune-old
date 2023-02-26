@@ -7,12 +7,12 @@ import org.jctools.queues.MessagePassingQueue
 import org.jctools.queues.SpscArrayQueue
 import org.jire.netrune.endpoint.AbstractService
 import org.jire.netrune.endpoint.IncomingMessage
-import org.jire.netrune.endpoint.Js5Responses
+import org.jire.netrune.endpoint.Js5GroupRepository
 import org.jire.netrune.endpoint.Session
 import org.jire.netrune.endpoint.js5.incoming.*
 
 class Js5Service(
-    private val js5Responses: Js5Responses
+    private val js5GroupRepository: Js5GroupRepository
 ) : AbstractService(7) {
 
     private val prefetchQueue: MessagePassingQueue<ByteBuf> = SpscArrayQueue(QUEUE_CAPACITY)
@@ -23,7 +23,7 @@ class Js5Service(
     override fun handle(session: Session, ctx: ChannelHandlerContext, message: IncomingMessage) {
         when (message) {
             is Js5PrefetchGroup -> {
-                val response = js5Responses[message.bitpack]
+                val response = js5GroupRepository[message.bitpack]
                     ?: throw DecoderException("Invalid group request (${message.archive}:${message.group})")
 
                 if (!prefetchQueue.offer(response))
@@ -31,7 +31,7 @@ class Js5Service(
             }
 
             is Js5OnDemandGroup -> {
-                val response = js5Responses[message.bitpack]
+                val response = js5GroupRepository[message.bitpack]
                     ?: throw DecoderException("Invalid group request (${message.archive}:${message.group})")
 
                 if (!onDemandQueue.offer(response))
