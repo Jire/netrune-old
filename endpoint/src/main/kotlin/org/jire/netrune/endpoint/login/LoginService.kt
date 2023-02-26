@@ -2,9 +2,15 @@ package org.jire.netrune.endpoint.login
 
 import io.netty.channel.ChannelHandlerContext
 import org.jire.netrune.endpoint.AbstractService
-import org.jire.netrune.endpoint.DecodeMessage
+import org.jire.netrune.endpoint.IncomingMessage
 import org.jire.netrune.endpoint.Rsa.rsa
 import org.jire.netrune.endpoint.Session
+import org.jire.netrune.endpoint.login.incoming.LoginConnect
+import org.jire.netrune.endpoint.login.incoming.LoginConnectDecoder
+import org.jire.netrune.endpoint.login.incoming.LoginProofOfWork
+import org.jire.netrune.endpoint.login.incoming.LoginProofOfWorkDecoder
+import org.jire.netrune.endpoint.login.outgoing.LoginResponse
+import org.jire.netrune.endpoint.login.outgoing.SolveProofOfWorkEncoder
 import org.openrs2.buffer.readString
 import org.openrs2.crypto.IsaacRandom
 import org.openrs2.crypto.XteaKey
@@ -15,25 +21,24 @@ class LoginService(
     private val executor: Executor
 ) : AbstractService(32) {
 
-    override fun handle(session: Session, ctx: ChannelHandlerContext, message: DecodeMessage) {
+    override fun handle(session: Session, ctx: ChannelHandlerContext, message: IncomingMessage) {
         when (message) {
-            is LoginConnectMessage -> {
-                session.loginConnectMessage = message
+            is LoginConnect -> {
+                session.loginConnect = message
                 executor.execute {
                     val proofText = ProofOfWork.generateText()
                     session.proofText = proofText
-                    val request = ProofOfWork.generateRequest(
-                        session.proofDifficulty, proofText,
-                        ctx.alloc()
-                    )
 
-                    ctx.writeAndFlush(request, ctx.voidPromise())
-
-                    ctx.read() // interested in response
+                    ctx.writeAndFlush(LoginResponse.SolveProofOfWork(session.proofDifficulty, session.proofText))
+                        .addListener { future ->
+                            if (future.isSuccess) {
+                                ctx.read()
+                            }
+                        }
                 }
             }
 
-            is LoginProofOfWorkMessage -> {
+            is LoginProofOfWork -> {
                 executor.execute {
                     val validated = ProofOfWork.validate(
                         session.proofDifficulty, session.proofText,
@@ -50,23 +55,16 @@ class LoginService(
     }
 
     init {
-        setDecoder(16, LoginConnectMessageDecoder)
-        setDecoder(18, LoginConnectMessageDecoder)
+        setDecoder(16, LoginConnectDecoder)
+        setDecoder(18, LoginConnectDecoder)
 
-        setDecoder(19, LoginProofOfWorkMessageDecoder)
-    }
-
-    fun sendResponse(ctx: ChannelHandlerContext, responseCode: Int, sessionKey: Long) {
-        val bufCapacity = 1 + 8
-        val buf = ctx.alloc().buffer(bufCapacity, bufCapacity)
-            .writeByte(responseCode)
-            .writeLong(sessionKey)
-        ctx.write(buf, ctx.voidPromise())
+        setDecoder(19, LoginProofOfWorkDecoder)
+        setEncoder(LoginResponse.SolveProofOfWork::class, SolveProofOfWorkEncoder)
     }
 
     private fun handleRsa(
         session: Session,
-        message: LoginConnectMessage = session.loginConnectMessage
+        message: LoginConnect = session.loginConnect
     ) {
         val secureBlockData = message.secureBlockData
         try {
@@ -129,7 +127,7 @@ class LoginService(
 
     private fun handleXtea(
         session: Session,
-        message: LoginConnectMessage = session.loginConnectMessage,
+        message: LoginConnect = session.loginConnect,
         clientXteaKey: XteaKey
     ) {
         val xteaData = message.xteaBlockData

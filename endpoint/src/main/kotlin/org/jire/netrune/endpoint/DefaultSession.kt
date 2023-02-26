@@ -1,6 +1,6 @@
 package org.jire.netrune.endpoint
 
-import org.jire.netrune.endpoint.login.LoginConnectMessage
+import org.jire.netrune.endpoint.login.incoming.LoginConnect
 import org.openrs2.crypto.NopStreamCipher
 import org.openrs2.crypto.StreamCipher
 
@@ -17,6 +17,6 @@ class DefaultSession(
 
     override lateinit var proofText: String
 
-    override lateinit var loginConnectMessage: LoginConnectMessage
+    override lateinit var loginConnect: LoginConnect
 
 }

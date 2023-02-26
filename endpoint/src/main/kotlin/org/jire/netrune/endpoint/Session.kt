@@ -1,6 +1,6 @@
 package org.jire.netrune.endpoint
 
-import org.jire.netrune.endpoint.login.LoginConnectMessage
+import org.jire.netrune.endpoint.login.incoming.LoginConnect
 import org.openrs2.crypto.StreamCipher
 
 interface Session {
@@ -15,6 +15,6 @@ interface Session {
     var proofDifficulty: Int
     var proofText: String
 
-    var loginConnectMessage: LoginConnectMessage
+    var loginConnect: LoginConnect
 
 }

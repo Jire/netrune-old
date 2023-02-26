@@ -9,7 +9,7 @@ import java.nio.channels.ClosedChannelException
 
 class SessionHandler(
     private val session: Session
-) : SimpleChannelInboundHandler<DecodeMessage>() {
+) : SimpleChannelInboundHandler<IncomingMessage>() {
 
     override fun channelActive(ctx: ChannelHandlerContext) {
         val channel = ctx.channel()
@@ -18,9 +18,10 @@ class SessionHandler(
         ctx.read() // interested in decoding
     }
 
-    override fun channelRead0(ctx: ChannelHandlerContext, msg: DecodeMessage) {
+    override fun channelRead0(ctx: ChannelHandlerContext, message: IncomingMessage) {
         val session = session
-        session.service.handle(session, ctx, msg)
+        println("handle $message with service ${session.service.javaClass}")
+        session.service.handle(session, ctx, message)
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {

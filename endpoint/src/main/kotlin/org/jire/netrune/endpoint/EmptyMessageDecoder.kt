@@ -3,7 +3,7 @@ package org.jire.netrune.endpoint
 import io.netty.buffer.ByteBuf
 import org.openrs2.crypto.StreamCipher
 
-abstract class EmptyMessageDecoder<M : DecodeMessage>(
+abstract class EmptyMessageDecoder<M : IncomingMessage>(
     private val message: M
 ) : FixedMessageDecoder<M>(0) {
 

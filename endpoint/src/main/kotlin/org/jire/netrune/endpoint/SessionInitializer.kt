@@ -16,11 +16,14 @@ class SessionInitializer(
     override fun initChannel(ch: SocketChannel) {
         val session: Session = DefaultSession(service)
 
+        val idleHandler: ChannelHandler = IdleStateHandler(true, timeout, timeout, timeout, timeoutUnit)
         val decoder: ChannelHandler = SessionDecoder(session)
+        val encoder: ChannelHandler = SessionEncoder(session)
         val handler: ChannelHandler = SessionHandler(session)
         ch.pipeline()
-            .addLast("idle_handler", IdleStateHandler(true, timeout, timeout, timeout, timeoutUnit))
+            .addLast("idle_handler", idleHandler)
             .addLast("decoder", decoder)
+            .addLast("encoder", encoder)
             .addLast("handler", handler)
     }
 

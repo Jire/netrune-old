@@ -6,9 +6,10 @@ import io.netty.handler.codec.DecoderException
 import org.jctools.queues.MessagePassingQueue
 import org.jctools.queues.SpscArrayQueue
 import org.jire.netrune.endpoint.AbstractService
-import org.jire.netrune.endpoint.DecodeMessage
+import org.jire.netrune.endpoint.IncomingMessage
 import org.jire.netrune.endpoint.Js5Responses
 import org.jire.netrune.endpoint.Session
+import org.jire.netrune.endpoint.js5.incoming.*
 
 class Js5Service(
     private val js5Responses: Js5Responses
@@ -19,9 +20,9 @@ class Js5Service(
 
     private var loggedIn = false
 
-    override fun handle(session: Session, ctx: ChannelHandlerContext, message: DecodeMessage) {
+    override fun handle(session: Session, ctx: ChannelHandlerContext, message: IncomingMessage) {
         when (message) {
-            is Js5PrefetchGroupMessage -> {
+            is Js5PrefetchGroup -> {
                 val response = js5Responses[message.bitpack]
                     ?: throw DecoderException("Invalid group request (${message.archive}:${message.group})")
 
@@ -29,7 +30,7 @@ class Js5Service(
                     throw IllegalStateException("Filled prefetch queue ($message)")
             }
 
-            is Js5OnDemandGroupMessage -> {
+            is Js5OnDemandGroup -> {
                 val response = js5Responses[message.bitpack]
                     ?: throw DecoderException("Invalid group request (${message.archive}:${message.group})")
 
@@ -37,19 +38,11 @@ class Js5Service(
                     throw IllegalStateException("Filled on-demand queue ($message)")
             }
 
-            is Js5LoggedInMessage -> loggedIn = true
-            is Js5LoggedOutMessage -> loggedIn = false
+            is Js5LoggedIn -> loggedIn = true
+            is Js5LoggedOut -> loggedIn = false
 
-            is Js5DisconnectMessage -> ctx.close()
+            is Js5Disconnect -> ctx.close()
         }
-    }
-
-    fun sendResponse(ctx: ChannelHandlerContext, responseCode: Int) {
-        val buf = ctx.alloc().buffer(1, 1)
-            .writeByte(responseCode)
-        ctx.writeAndFlush(buf, ctx.voidPromise())
-
-        ctx.channel().config().isAutoRead = true
     }
 
     override fun readComplete(session: Session, ctx: ChannelHandlerContext) {
@@ -94,16 +87,16 @@ class Js5Service(
     }
 
     init {
-        setDecoder(0, Js5PrefetchGroupMessageDecoder)
-        setDecoder(1, Js5OnDemandGroupMessageDecoder)
+        setDecoder(0, Js5PrefetchGroupDecoder)
+        setDecoder(1, Js5OnDemandGroupDecoder)
 
-        setDecoder(2, Js5LoggedInMessageDecoder)
-        setDecoder(3, Js5LoggedOutMessageDecoder)
+        setDecoder(2, Js5LoggedInDecoder)
+        setDecoder(3, Js5LoggedOutDecoder)
 
-        setDecoder(4, Js5RekeyMessageDecoder)
+        setDecoder(4, Js5RekeyDecoder)
 
-        setDecoder(5, Js5ConnectedMessageDecoder)
-        setDecoder(6, Js5DisconnectMessageDecoder)
+        setDecoder(5, Js5ConnectedDecoder)
+        setDecoder(6, Js5DisconnectDecoder)
     }
 
     private companion object {

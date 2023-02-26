@@ -2,7 +2,7 @@ package org.jire.netrune.endpoint
 
 import io.netty.buffer.ByteBuf
 
-abstract class FixedMessageDecoder<M : DecodeMessage>(
+abstract class FixedMessageDecoder<M : IncomingMessage>(
     protected val length: Int
 ) : MessageDecoder<M> {
 
