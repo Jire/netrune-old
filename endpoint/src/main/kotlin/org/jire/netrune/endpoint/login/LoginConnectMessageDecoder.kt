@@ -9,25 +9,25 @@ object LoginConnectMessageDecoder : VariableShortMessageDecoder<LoginConnectMess
     override fun decode(input: ByteBuf, opcode: Int, cipher: StreamCipher): LoginConnectMessage {
         val reconnect = opcode == 18
 
-        val version = input.readInt() // 211
-        val subVersion = input.readInt() // 1
+        val buildMajor = input.readInt()
+        val buildMinor = input.readInt()
 
-        val clientType = input.readUnsignedByte().toInt() // 1 = desktop
-        val jxType = input.readUnsignedByte().toInt() // 0 = default, 5 = active
+        val clientType = input.readUnsignedByte().toInt()
+        val platformType = input.readUnsignedByte().toInt()
 
-        val encryptionType = input.readUnsignedByte().toInt() // 0 = RSA
-        val encryptionLength = input.readUnsignedShort()
-        val encryptionData = input.readRetainedSlice(encryptionLength)
+        val secureBlockType = input.readUnsignedByte().toInt()
+        val secureBlockLength = input.readUnsignedShort()
+        val secureBlockData = input.readRetainedSlice(secureBlockLength)
 
-        val xteaLength = input.readableBytes()
-        val xteaBuf = input.readRetainedSlice(xteaLength)
+        val xteaBlockLength = input.readableBytes()
+        val xteaBlockData = input.readRetainedSlice(xteaBlockLength)
 
         return LoginConnectMessage(
             reconnect,
-            version, subVersion,
-            clientType, jxType,
-            encryptionType, encryptionLength, encryptionData,
-            xteaLength, xteaBuf
+            buildMajor, buildMinor,
+            clientType, platformType,
+            secureBlockType, secureBlockLength, secureBlockData,
+            xteaBlockLength, xteaBlockData
         )
     }
 

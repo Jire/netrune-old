@@ -18,13 +18,13 @@ class InitService(
     override fun handle(session: Session, ctx: ChannelHandlerContext, message: DecodeMessage) {
         when (message) {
             is InitLoginMessage -> {
-                val serverKey = ThreadLocalRandom.current().nextLong()
-                session.serverKey = serverKey
+                val serverSeed = ThreadLocalRandom.current().nextLong()
+                session.serverSeed = serverSeed
 
                 val service = LoginService(executor)
                 session.service = service
 
-                service.sendResponse(ctx, 0, serverKey)
+                service.sendResponse(ctx, 0, serverSeed)
                 ctx.read()
             }
 

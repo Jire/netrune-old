@@ -41,7 +41,7 @@ class LoginService(
                     )
                     require(validated)
 
-                    decodeRsa(session)
+                    handleRsa(session)
                 }
             }
 
@@ -64,77 +64,77 @@ class LoginService(
         ctx.write(buf, ctx.voidPromise())
     }
 
-    private fun decodeRsa(
+    private fun handleRsa(
         session: Session,
         message: LoginConnectMessage = session.loginConnectMessage
     ) {
-        val encryptedData = message.encryptedData
+        val secureBlockData = message.secureBlockData
         try {
-            require(message.encryptType == 0)
+            require(message.secureBlockType == 0)
 
-            val data = encryptedData.rsa()
+            val blockData = secureBlockData.rsa()
             try {
-                val check = data.readUnsignedByte().toInt()
+                val check = blockData.readUnsignedByte().toInt()
                 require(check == 1)
 
-                val clientSeed = IntArray(4) {
-                    data.readInt()
-                }
-                val serverSeed = IntArray(clientSeed.size) {
-                    clientSeed[it] + 50
-                }
-                session.decodeCipher = IsaacRandom(clientSeed)
-                session.encodeCipher = IsaacRandom(serverSeed)
+                val clientXteaKey = XteaKey(
+                    blockData.readInt(),
+                    blockData.readInt(),
+                    blockData.readInt(),
+                    blockData.readInt()
+                )
 
-                val sessionId = data.readLong()
+                val serverSeed = blockData.readLong()
 
                 if (message.reconnect) {
-                    for (i in 0..clientSeed.lastIndex) {
-                        val previous = data.readInt()
-                        val current = clientSeed[i]
-                        require(previous == current)
-                    }
+                    val previousXteaKey = XteaKey(
+                        blockData.readInt(),
+                        blockData.readInt(),
+                        blockData.readInt(),
+                        blockData.readInt()
+                    )
+                    require(clientXteaKey == previousXteaKey)
                 }
 
-                val authType = data.readUnsignedByte().toInt()
+                session.decodeCipher = IsaacRandom(clientXteaKey.toIntArray())
+                session.encodeCipher = IsaacRandom(clientXteaKey.toIntArray().map { it + 50 }.toIntArray())
+
+                val authType = blockData.readUnsignedByte().toInt()
                 var identifier = -1
                 var authCode = -1
                 when (authType) {
-                    0 -> identifier = data.readInt()
+                    0 -> identifier = blockData.readInt()
                     1, 3 -> {
-                        authCode = data.readUnsignedMedium()
-                        data.skipBytes(1)
+                        authCode = blockData.readUnsignedMedium()
+                        blockData.skipBytes(1)
                     }
 
-                    2 -> data.skipBytes(4)
+                    2 -> blockData.skipBytes(4)
 
                     else -> throw UnsupportedOperationException("Unsupported auth type: $authType")
                 }
 
-                data.skipBytes(1)
+                blockData.skipBytes(1)
 
-                val password = data.readString()
+                val password = blockData.readString()
 
-                decodeXtea(session, message, clientSeed)
+                handleXtea(session, message, clientXteaKey)
             } finally {
-                data.release()
+                blockData.release()
             }
         } finally {
-            encryptedData.release()
+            secureBlockData.release()
         }
     }
 
-    private fun decodeXtea(
+    private fun handleXtea(
         session: Session,
         message: LoginConnectMessage = session.loginConnectMessage,
-        clientSeed: IntArray
+        clientXteaKey: XteaKey
     ) {
-        val xteaData = message.xteaData
+        val xteaData = message.xteaBlockData
         try {
-            xteaData.xteaDecrypt(
-                0, message.xteaLength,
-                XteaKey(clientSeed[0], clientSeed[1], clientSeed[2], clientSeed[3])
-            )
+            xteaData.xteaDecrypt(0, message.xteaBlockLength, clientXteaKey)
 
             val username = xteaData.readString()
         } finally {

@@ -5,16 +5,16 @@ import io.netty.buffer.ByteBuf
 data class LoginConnectMessage(
     val reconnect: Boolean,
 
-    val version: Int,
-    val subVersion: Int,
+    val buildMajor: Int,
+    val buildMinor: Int,
 
     val clientType: Int,
-    val jxType: Int,
+    val platformType: Int,
 
-    val encryptType: Int,
-    val encryptedLength: Int,
-    val encryptedData: ByteBuf,
+    val secureBlockType: Int,
+    val secureBlockLength: Int,
+    val secureBlockData: ByteBuf,
 
-    val xteaLength: Int,
-    val xteaData: ByteBuf
+    val xteaBlockLength: Int,
+    val xteaBlockData: ByteBuf
 ) : LoginDecodeMessage

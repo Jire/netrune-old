@@ -7,10 +7,10 @@ interface Session {
 
     var service: Service
 
+    var serverSeed: Long
+
     var decodeCipher: StreamCipher
     var encodeCipher: StreamCipher
-
-    var serverKey: Long
 
     var proofDifficulty: Int
     var proofText: String

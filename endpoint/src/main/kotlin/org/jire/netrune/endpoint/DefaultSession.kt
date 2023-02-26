@@ -8,8 +8,9 @@ class DefaultSession(
     override var service: Service,
 
     override var decodeCipher: StreamCipher = NopStreamCipher,
+    override var encodeCipher: StreamCipher = NopStreamCipher,
 
-    override var serverKey: Long = 0L,
+    override var serverSeed: Long = -1L,
 
     override var proofDifficulty: Int = 16
 ) : Session {
