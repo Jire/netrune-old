@@ -6,6 +6,7 @@ import org.jire.netrune.endpoint.DecodeMessage
 import org.jire.netrune.endpoint.Rsa.rsa
 import org.jire.netrune.endpoint.Session
 import org.openrs2.buffer.readString
+import org.openrs2.crypto.IsaacRandom
 import org.openrs2.crypto.XteaKey
 import org.openrs2.crypto.xteaDecrypt
 import java.util.concurrent.Executor
@@ -40,7 +41,7 @@ class LoginService(
                     )
                     require(validated)
 
-                    decodeRsa(session.loginConnectMessage)
+                    decodeRsa(session)
                 }
             }
 
@@ -63,7 +64,10 @@ class LoginService(
         ctx.write(buf, ctx.voidPromise())
     }
 
-    private fun decodeRsa(message: LoginConnectMessage) {
+    private fun decodeRsa(
+        session: Session,
+        message: LoginConnectMessage = session.loginConnectMessage
+    ) {
         val encryptedData = message.encryptedData
         try {
             require(message.encryptType == 0)
@@ -76,6 +80,12 @@ class LoginService(
                 val clientSeed = IntArray(4) {
                     data.readInt()
                 }
+                val serverSeed = IntArray(clientSeed.size) {
+                    clientSeed[it] + 50
+                }
+                session.decodeCipher = IsaacRandom(clientSeed)
+                session.encodeCipher = IsaacRandom(serverSeed)
+
                 val sessionId = data.readLong()
 
                 if (message.reconnect) {
@@ -105,7 +115,7 @@ class LoginService(
 
                 val password = data.readString()
 
-                decodeXtea(message, clientSeed)
+                decodeXtea(session, message, clientSeed)
             } finally {
                 data.release()
             }
@@ -114,7 +124,11 @@ class LoginService(
         }
     }
 
-    private fun decodeXtea(message: LoginConnectMessage, clientSeed: IntArray) {
+    private fun decodeXtea(
+        session: Session,
+        message: LoginConnectMessage = session.loginConnectMessage,
+        clientSeed: IntArray
+    ) {
         val xteaData = message.xteaData
         try {
             xteaData.xteaDecrypt(

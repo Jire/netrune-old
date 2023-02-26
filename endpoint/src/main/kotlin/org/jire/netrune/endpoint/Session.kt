@@ -8,6 +8,7 @@ interface Session {
     var service: Service
 
     var decodeCipher: StreamCipher
+    var encodeCipher: StreamCipher
 
     var serverKey: Long
 
