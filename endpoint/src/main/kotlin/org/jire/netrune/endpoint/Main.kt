@@ -1,7 +1,7 @@
 package org.jire.netrune.endpoint
 
 import io.netty.channel.EventLoopGroup
-import org.jire.netrune.endpoint.game.Xteas
+import org.jire.netrune.endpoint.game.DefaultXteaRepository
 import org.jire.netrune.endpoint.init.InitService
 import org.jire.netrune.endpoint.js5.Js5GroupRepository
 import org.jire.netrune.endpoint.js5.Openrs2Js5GroupRepository
@@ -18,7 +18,7 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        Xteas.load()
+        DefaultXteaRepository.load()
 
         val worldID = 1
 
